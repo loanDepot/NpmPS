@@ -45,14 +45,7 @@ function Get-NpmPackageInfo
 
             $uri = "{0}{1}" -f $Registry, $Name
 
-            $package = Invoke-RestMethod -Uri $uri
-
-            if ($null -ne $package)
-            {
-                # I want an object, but all the child elements as hashtables
-                $object = ConvertTo-Json -InputObject $package | ConvertFrom-LDJson
-                [PSCustomObject]$object
-            }
+            Invoke-RestMethod -Uri $uri
         }
         catch
         {

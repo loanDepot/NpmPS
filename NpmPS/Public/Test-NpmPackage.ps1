@@ -88,7 +88,7 @@ function Test-NpmPackage
                     return $false
                 }
 
-                if ( -not $package.versions.contains($Version) )
+                if ( -not $package.versions.$Version )
                 {
                     Write-Verbose "This package version [$Version] was not found"
                     return $false
@@ -103,7 +103,7 @@ function Test-NpmPackage
                     return $false
                 }
 
-                if ( -not $package.'dist-tags'.contains( $Tag ) )
+                if ( -not $package.'dist-tags'.$Tag )
                 {
                     Write-Verbose "This package tag [$Tag] was not found"
                     return $false
