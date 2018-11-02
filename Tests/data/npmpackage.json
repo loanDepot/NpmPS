@@ -1,0 +1,50 @@
+{
+  "description": "contoso Component",
+  "main": "contoso-component.bundle.js",
+  "author": {
+    "name": "Jim Stevens",
+    "email": "jstevens@contoso.com"
+  },
+  "name": "contoso-component",
+  "_id": "contoso-component@0.0.0-rc.5",
+  "time": {
+    "0.0.0-rc.5": "2018-11-01T02:02:41.59Z",
+    "0.0.1": "2018-11-01T02:02:41.59Z"
+  },
+  "versions": {
+    "0.0.0-rc.5": {
+      "description": "Contoso Component",
+      "main": "contoso-component.bundle.js",
+      "author": {
+        "name": "Collin Stevens",
+        "email": "costevens@loandepot.com"
+      },
+      "name": "contoso-component",
+      "version": "0.0.0-rc.5",
+      "dist": {
+        "tarball": "http://contoso.com/npm/LDnpm/contoso-component/-/contoso-component-0.0.0-rc.5.tgz",
+        "shasum": "a10c34afbfb9b4c51d330e97482089c30fe58679"
+      },
+      "_id": "contoso-component@0.0.0-rc.5"
+    },
+    "0.0.1": {
+      "description": "Contoso Component",
+      "main": "contoso-component.bundle.js",
+      "author": {
+        "name": "Collin Stevens",
+        "email": "costevens@loandepot.com"
+      },
+      "name": "contoso-component",
+      "version": "0.0.1",
+      "dist": {
+        "tarball": "http://contoso.com/npm/LDnpm/contoso-component/-/contoso-component-0.0.1.tgz",
+        "shasum": "a10c34afbfb9b4c51d330e97482089c30fe58679"
+      },
+      "_id": "contoso-component@0.0.1"
+    }
+  },
+  "dist-tags": {
+    "latest": "0.0.1",
+    "prerelease": "0.0.0-rc.5"
+  }
+}
