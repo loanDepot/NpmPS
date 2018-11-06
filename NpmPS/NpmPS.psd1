@@ -98,7 +98,7 @@ PrivateData = @{
         Tags = @('NPM','loanDepot')
 
         # A URL to the license for this module.
-        # LicenseUri = ''
+        LicenseUri = 'https://github.com/loanDepot/NpmPS/blob/master/LICENSE'
 
         # A URL to the main website for this project.
         ProjectUri = 'https://github.com/loanDepot/NpmPS'
