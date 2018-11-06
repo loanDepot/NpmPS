@@ -16,11 +16,79 @@ task PublishModule {
         Get-ChildItem $Destination -Recurse -File |
             Select-Object -Expand FullName
 
+        if (Get-Command dotnet -ErrorAction Ignore)
+        {
+            "Dotnet version"
+            dotnet --Version
+        }
+        else
+        {
+            "nuget version"
+            nuget help | Select-First -First 1
+        }
+
         "Publishing [$Destination] to [$PSRepository]"
 
-        dotnet --Version
-        nuget help | Select-First -First 1
         Publish-Module @publishModuleSplat
+
+        $moduleSource = Get-PSRepository -Name PSGallery
+        $Destination = $moduleSource.PublishLocation
+
+        "Finding nupkg"
+        $NupkgPath = Get-ChildItem -Recurse *.nupkg | % FullName
+        "  [$NupkgPath]"
+
+        $workingdirectory = Split-Path $NupkgPath
+        $tempErrorFile = Join-Path $workingdirectory 'errorout.txt'
+        $tempOutputFile = Join-Path $workingdirectory 'stdout.txt'
+
+        "Manual Publish of package"
+        $errorMsg = $null
+        $outputMsg = $null
+        $StartProcess_params = @{
+            RedirectStandardError = $tempErrorFile
+            RedirectStandardOutput = $tempOutputFile
+            NoNewWindow = $true
+            Wait = $true
+            PassThru = $true
+        }
+
+        $StartProcess_params['FilePath'] = (Get-Command dotnet).Path
+
+        $ArgumentList = @('nuget')
+        $ArgumentList += 'push'
+        $ArgumentList += "`"$NupkgPath`""
+        $ArgumentList += @('--source', "`"$($Destination.TrimEnd('\'))`"")
+        $ArgumentList += @('--api-key', "`"$env:NugetApiKey`"")
+        $ArgumentList += @('-v','diag')
+
+        $StartProcess_params['ArgumentList'] = $ArgumentList
+
+        if($script:IsCoreCLR -and -not $script:IsNanoServer) {
+            $StartProcess_params['WhatIf'] = $false
+            $StartProcess_params['Confirm'] = $false
+        }
+
+        $process = Microsoft.PowerShell.Management\Start-Process @StartProcess_params
+
+        if(Test-Path -Path $tempErrorFile -PathType Leaf) {
+            $errorMsg = Microsoft.PowerShell.Management\Get-Content -Path $tempErrorFile -Raw
+
+            if($errorMsg) {
+
+                Write-Verbose -Message $tempErrorFile -Verbose:$true
+                Write-Verbose -Message $errorMsg -Verbose:$true
+            }
+        }
+
+        if(Test-Path -Path $tempOutputFile -PathType Leaf) {
+            $outputMsg = Microsoft.PowerShell.Management\Get-Content -Path $tempOutputFile -Raw
+
+            if($outputMsg) {
+                Write-Verbose -Message $tempOutputFile -Verbose:$true
+                Write-Verbose -Message $outputMsg -Verbose:$true
+            }
+        }
     }
     else
     {
