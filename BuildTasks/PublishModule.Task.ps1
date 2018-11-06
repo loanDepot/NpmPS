@@ -18,7 +18,7 @@ task PublishModule {
 
         "Publishing [$Destination] to [$PSRepository]"
 
-        dotnet.exe --Version
+        dotnet --Version
         nuget help | Select-First -First 1
         Publish-Module @publishModuleSplat
     }
