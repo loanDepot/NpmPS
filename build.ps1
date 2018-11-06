@@ -3,6 +3,8 @@ param($Task = 'Default')
 
 $ProgressPreference = 'SilentlyContinue'
 
+Import-Module .\Debug\PowerShellGet -Verbose
+
 $Script:Modules = @(
     'BuildHelpers',
     'InvokeBuild',
