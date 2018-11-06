@@ -11,6 +11,7 @@ function Publish-NpmPackage
 
         $publishLDNpmPackageSplat = @{
             Credential = $credential
+            Email      = user@contoso.com
             Path       = $path
             Registry   = $registry
             Version    = '0.1.0-rc.1'
@@ -42,6 +43,10 @@ function Publish-NpmPackage
         [PSCredential]
         $Credential,
 
+        # Email
+        [String]
+        $Email,
+
         # SemVer
         [String]
         $Version,
@@ -58,7 +63,7 @@ function Publish-NpmPackage
 
     begin
     {
-        $npmProtocolRegex = '^http?:'
+        $npmProtocolRegex = '^https?:'
     }
 
     process
@@ -145,7 +150,7 @@ function Publish-NpmPackage
 registry=${Registry}
 ${shortRegName}:_password=$password
 ${shortRegName}:username=$($credential.username)
-${shortRegName}:email=devops@loandepot.com
+${shortRegName}:email=$Email
 ${shortRegName}:always-auth=false
 "@
             $configPath = Join-Path $pwd -ChildPath '.npmrc'

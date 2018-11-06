@@ -16,8 +16,8 @@
       "description": "Contoso Component",
       "main": "contoso-component.bundle.js",
       "author": {
-        "name": "Collin Stevens",
-        "email": "costevens@loandepot.com"
+        "name": "Jim Stevens",
+        "email": "jstevens@contoso.com"
       },
       "name": "contoso-component",
       "version": "0.0.0-rc.5",
@@ -31,8 +31,8 @@
       "description": "Contoso Component",
       "main": "contoso-component.bundle.js",
       "author": {
-        "name": "Collin Stevens",
-        "email": "costevens@loandepot.com"
+        "name": "Jim Stevens",
+        "email": "jstevens@contoso.com"
       },
       "name": "contoso-component",
       "version": "0.0.1",
